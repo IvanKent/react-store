@@ -1,25 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [results, setResults] = useState([])
+  useEffect(() => {
+
+      const fetchData = async () => {
+        try{
+        const response = await fetch('http://localhost:3001/categories');
+        const data = await response.json();
+        console.log(data);
+        setResults(data);
+        }catch(error){
+          console.error('error!', error);
+        }
+      };
+
+
+
+    fetchData();
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {results.map(result => {
+        return <li key={result.id}>
+          {result.title}
+        </li>
+      })}
     </div>
-  );
+  )
 }
 
 export default App;
