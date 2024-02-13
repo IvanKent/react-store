@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import Category from './components/Category';
 
 function App() {
   const [results, setResults] = useState([])
@@ -18,16 +19,18 @@ function App() {
 
     fetchData();
   }, [])
+
+  const renderCategories = () => {
+    return results.map(result => {
+      return <Category key={result.id} result={result}/>
+    })
+  }
   return (
     <div className='mainContainer'>
     <header>My Store</header>
     <section>
       <nav>
-        {results.map(result => {
-          return <li key={result.id}>
-            {result.title}
-          </li>
-        })}
+        {results && renderCategories()}
       </nav>
       <article>
         main area
