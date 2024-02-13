@@ -16,17 +16,27 @@ function App() {
         }
       };
 
-
-
     fetchData();
   }, [])
   return (
-    <div>
-      {results.map(result => {
-        return <li key={result.id}>
-          {result.title}
-        </li>
-      })}
+    <div className='mainContainer'>
+    <header>My Store</header>
+    <section>
+      <nav>
+        {results.map(result => {
+          return <li key={result.id}>
+            {result.title}
+          </li>
+        })}
+      </nav>
+      <article>
+        main area
+      </article>
+    </section>
+    <footer>
+      footer
+    </footer>
+
     </div>
   )
 }
