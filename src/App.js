@@ -1,24 +1,23 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import Category from './components/Category';
+import { fetcher } from './fetcher';
 
 function App() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   useEffect(() => {
 
-      const fetchData = async () => {
+      const fetchedData = async () => {
         try{
-        const response = await fetch('http://localhost:3001/categories');
-        const data = await response.json();
-        console.log(data);
-        setCategories(data);
+          const data = await fetcher('categories');
+          setCategories(data);
         }catch(error){
           console.error('error!', error);
         }
       };
 
-    fetchData();
+    fetchedData();
   }, []);
 
   const renderCategories = () => {
