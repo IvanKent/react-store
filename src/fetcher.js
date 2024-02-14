@@ -27,3 +27,8 @@ export const getProducts = (id) => {
     const data = fetcher(`/products?catId=${id}`)
     return data;
 }
+
+export const getProductById = (id) => {
+    const data = fetcher(`/products/${id}`)
+    return data;
+}
