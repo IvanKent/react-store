@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import Category from './components/Category';
-import CategoryProduct from './CategoryProduct';
+import CategoryProduct from './components/CategoryProduct';
 import { getCategories, getProducts  } from './fetcher';
 
 function App() {

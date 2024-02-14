@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import ProductDetail from './components/ProductDetail';
+import Basket from './components/Basket';
+import Checkout from './components/Checkout';
+
 import {
   BrowserRouter,
   Routes, 
@@ -16,6 +20,10 @@ root.render(
       <BrowserRouter>
         <Routes> 
           <Route path='/' element={<App/>}/>
+          <Route path='/basket' element={<Basket/>}/>
+          <Route path='checkout' element={<Checkout/>}/>
+          <Route path='/products/:productId' element={<ProductDetail/>}/>
+
         </Routes>
       </BrowserRouter>
   </React.StrictMode>
