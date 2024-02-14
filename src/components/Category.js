@@ -1,7 +1,7 @@
-export default function Category({result}){
+export default function Category({category, onCategoryClick}){
     return (
         <>
-          <li key={result.id}>{result.title}</li>
+          <li onClick={() => onCategoryClick(category.id)}>{category.title}</li>
           {/* {console.log(result)}/\ */}
         </>
     )

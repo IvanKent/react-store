@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import Category from './components/Category';
 
 function App() {
-  const [results, setResults] = useState([])
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
   useEffect(() => {
 
       const fetchData = async () => {
@@ -11,29 +12,47 @@ function App() {
         const response = await fetch('http://localhost:3001/categories');
         const data = await response.json();
         console.log(data);
-        setResults(data);
+        setCategories(data);
         }catch(error){
           console.error('error!', error);
         }
       };
 
     fetchData();
-  }, [])
+  }, []);
 
   const renderCategories = () => {
-    return results.map(result => {
-      return <Category key={result.id} result={result}/>
+    return categories.map(category => {
+      return <Category key={category.id} category={category} onCategoryClick={() => handleCategoryClick(category.id)}/>
     })
+  }
+
+  const renderProducts = () => {
+    return products.map(product => {
+      return <li key={product.id}>{product.title}</li>
+    })
+  }
+
+  const handleCategoryClick = async (id) => {
+    console.log(id)
+    // return alert('dfskfjsf', id)
+    const response = await fetch(`http://localhost:3001/products?catId=${id}`)
+    const data = await response.json();
+    console.log(data);
+    setProducts(data);
   }
   return (
     <div className='mainContainer'>
     <header>My Store</header>
     <section>
       <nav>
-        {results && renderCategories()}
+        {categories && renderCategories()}
+        
       </nav>
       <article>
-        main area
+        {products.length>1 && <h1>Products</h1>}
+        {products.length<1 && <h1>No Products Found!</h1>}
+        {products && renderProducts()}
       </article>
     </section>
     <footer>
