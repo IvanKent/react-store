@@ -1,6 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import Category from './components/Category';
+import CategoryProduct from './CategoryProduct';
 import { getCategories, getProducts  } from './fetcher';
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
 
   const renderProducts = () => {
     return products.data.map(product => {
-      return <li key={product.id}>{product.title}</li>
+      // return <li key={product.id}>{product.title}</li>
+      return <CategoryProduct key={product.id} product={product}/>
     })
   }
 
