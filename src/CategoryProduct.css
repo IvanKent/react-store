@@ -1,7 +1,10 @@
 .productMainContainer{
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    padding-bottom: 30px;
+    border: 0px 0px 1px 0px black solid;
+    /* border: 1px solid black; */
+
 }
 .productContainer{
     display: flex;
@@ -9,7 +12,8 @@
     /* border: 1px solid black; */
 }
 .productImage{
-
+    width: 200px;
+    padding: 0 20px;
 }
 
 .productCheckOut{

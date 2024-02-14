@@ -5,9 +5,7 @@ export default function CategoryProduct({product}) {
             <div className='productMainContainer'>
                 <h2 className='productTitle'>{product.title}</h2>
                 <div className='productContainer'>
-                    <div className='productImage'>
-                        <img src={process.env.PUBLIC_URL + `/assets/${product.image}`} alt={product.description}/>
-                    </div>
+                        <img className='productImage' src={process.env.PUBLIC_URL + `/assets/${product.image}`} alt={product.description}/>
                     <div className='productDetails'>
                         <h3>Dimension</h3>
                         <h3>{product.specs.dimensions}</h3>
