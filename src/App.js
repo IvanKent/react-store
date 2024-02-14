@@ -1,57 +1,49 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import Category from './components/Category';
-import { fetcher } from './fetcher';
+import { getCategories, getProducts  } from './fetcher';
 
 function App() {
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState({errorMessage: '', data: []});
+  const [products, setProducts] = useState({errorMessage: '', data: []});
   useEffect(() => {
-
       const fetchedData = async () => {
-        try{
-          const data = await fetcher('categories');
-          setCategories(data);
-        }catch(error){
-          console.error('error!', error);
-        }
+          const responseObject = await getCategories();
+          setCategories(responseObject);
       };
 
     fetchedData();
   }, []);
 
   const renderCategories = () => {
-    return categories.map(category => {
+    return categories.data.map(category => {
       return <Category key={category.id} category={category} onCategoryClick={() => handleCategoryClick(category.id)}/>
     })
   }
 
   const renderProducts = () => {
-    return products.map(product => {
+    return products.data.map(product => {
       return <li key={product.id}>{product.title}</li>
     })
   }
 
   const handleCategoryClick = async (id) => {
-    console.log(id)
-    // return alert('dfskfjsf', id)
-    const response = await fetch(`http://localhost:3001/products?catId=${id}`)
-    const data = await response.json();
-    console.log(data);
-    setProducts(data);
+    const responseObject = await getProducts(id);
+    setProducts(responseObject);
   }
   return (
     <div className='mainContainer'>
     <header>My Store</header>
     <section>
       <nav>
-        {categories && renderCategories()}
-        
+        {categories.data && renderCategories()}
+        {categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
       </nav>
       <article>
-        {products.length>1 && <h1>Products</h1>}
-        {products.length<1 && <h1>No Products Found!</h1>}
-        {products && renderProducts()}
+        {products.data.length>1 && <h1>Products</h1>}
+        {/* {products.data.length<1 && <h1>No Products Found!</h1>} */}
+        {products.data && renderProducts()}
+        {products.errorMessage && <div>Error: {products.errorMessage}</div>}
       </article>
     </section>
     <footer>
