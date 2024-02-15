@@ -1,17 +1,26 @@
-import '../CategoryProduct.css'
-
 import { Link, useNavigate } from 'react-router-dom'
+
+import '../CategoryProduct.css'
+import styled from 'styled-components';
+
+
+//sample using styled-components 
+const ProductTitle = styled.h2`
+    color: red;
+    font-size: 20px;
+`;
+
 
 export default function CategoryProduct({product}) {
     const navigate = useNavigate();
     return(
         <>
             <div className='productMainContainer'>
-                <h2 className='productTitle'>
+                <ProductTitle>
                     <Link to={`products/${product.id}`}>
                         {product.title}
                     </Link>
-                </h2>
+                </ProductTitle>
                 <div className='productContainer'>
                         <img className='productImage' src={process.env.PUBLIC_URL + `/assets/${product.image}`} alt={product.description}/>
                     <div className='productDetails'>
