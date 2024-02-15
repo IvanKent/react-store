@@ -17,6 +17,8 @@ export default function CategoryProduct({product}) {
                     <div className='productDetails'>
                         <h3>Dimension</h3>
                         <h3>{product.specs.dimensions}</h3>
+                        {product.specs.capacity && <h3>Capacity</h3>}
+                        <h3>{product.specs.capacity}</h3>
                         <h3>Features</h3>
                         <ul>
                             {product.features && product.features.map((feature,index) => {
