@@ -1,9 +1,19 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import CategoryProduct from './components/CategoryProduct';
-import { getCategories, getProducts  } from './fetcher';
+import { getCategories  } from './fetcher';
 
-import { Link } from 'react-router-dom';
+import ProductDetail from './components/ProductDetail';
+import Basket from './components/Basket';
+import Checkout from './components/Checkout';
+import Category from './components/Category';
+import Layout from './components/Layout';
+
+import {
+  BrowserRouter,
+  Routes, 
+  Route
+} from "react-router-dom"
+
 
 function App() {
   const [categories, setCategories] = useState({errorMessage: '', data: []});
@@ -17,38 +27,22 @@ function App() {
     fetchedData();
   }, []);
 
-  const renderCategories = () => {
-    return categories.data.map(category => {
-      return <li key={category.id}><Link to={`/categories/${category.id}`}>{category.title}</Link></li>
-    })
-  }
 
 
-
-  const handleCategoryClick = async (id) => {
-    const responseObject = await getProducts(id);
-    setProducts(responseObject);
-  }
   return (
-    <div className='mainContainer'>
-    <header>My Store</header>
-    <section>
-      <nav>
-        <ul>
-          {categories.data && renderCategories()}
-        </ul>
-
-        {categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
-      </nav>
-      <article>
-
-      </article>
-    </section>
-    <footer>
-      footer
-    </footer>
-
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes> 
+          <Route path='/' element={<Layout categories={categories}/>}>
+            <Route path='/basket' element={<Basket/>}/>
+            <Route path='checkout' element={<Checkout/>}/>
+            <Route path='/products/:id' element={<ProductDetail/>}/>
+            <Route path='/categories/:id' element={<Category/>}/>
+            
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   )
 }
 

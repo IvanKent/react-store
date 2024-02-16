@@ -1,3 +1,5 @@
+//
+
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { getProducts } from "../fetcher";
@@ -5,16 +7,18 @@ import { getProducts } from "../fetcher";
 import CategoryProduct from "./CategoryProduct";
 
 export default function Category({category, onCategoryClick}){
+  //sets initial data
   const [products, setProducts] = useState({errorMessage: '', data: []})
-  const {id} = useParams(); 
+  const {id} = useParams(); //gets the id from the URL
 
 
   useEffect(() => {
+    //function to fetch data from the fetcher
     const fetchedData = async() => {
       const responseObject = await getProducts(id);
-      setProducts(responseObject)
+      setProducts(responseObject) 
     }
-    fetchedData();
+    fetchedData(); //calls the function
   }, [id]);
 
 
@@ -28,7 +32,6 @@ export default function Category({category, onCategoryClick}){
     return (
         <>
           {products.data.length>1 && <h1>Products</h1>}
-          {/* {products.data.length<1 && <h1>No Products Found!</h1>} */}
           {products.data && renderProducts()}
           {products.errorMessage && <div>Error: {products.errorMessage}</div>}
         </>

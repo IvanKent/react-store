@@ -4,30 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import ProductDetail from './components/ProductDetail';
-import Basket from './components/Basket';
-import Checkout from './components/Checkout';
-import Category from './components/Category';
 
-import {
-  BrowserRouter,
-  Routes, 
-  Route
-} from "react-router-dom"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <BrowserRouter>
-        <Routes> 
-          <Route path='/' element={<App/>}/>
-          <Route path='/basket' element={<Basket/>}/>
-          <Route path='checkout' element={<Checkout/>}/>
-          <Route path='/products/:id' element={<ProductDetail/>}/>
-          <Route path='/categories/:id' element={<Category/>}></Route>
-
-        </Routes>
-      </BrowserRouter>
+    <App/>
   </React.StrictMode>
 );
 

@@ -1,3 +1,5 @@
+//Renders a one Product
+
 import { getProductById } from "../fetcher"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";

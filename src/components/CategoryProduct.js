@@ -1,3 +1,5 @@
+//renders a list of products to a specific Product Category
+
 import { Link, useNavigate } from 'react-router-dom'
 
 import '../CategoryProduct.css'
@@ -16,7 +18,7 @@ export default function CategoryProduct({product}) {
         <>
             <div className='productMainContainer'>
                 <ProductTitle>
-                    <Link to={`products/${product.id}`}>
+                    <Link to={`/products/${product.id}`}>
                         {product.title}
                     </Link>
                 </ProductTitle>
