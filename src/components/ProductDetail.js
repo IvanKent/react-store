@@ -6,17 +6,16 @@ import '../ProductDetail.css'
 
 export default function ProductDetail(){
     const [product, setProduct] = useState({errorMessage: '', data: []})
-    const params = useParams();
-    console.log(params.id)
+    const {id} = useParams();
     useEffect(() => {
         const fetchedData = async () => {
-            const responseData = await getProductById(params.id);
+            const responseData = await getProductById(id);
             console.log(responseData)
             setProduct(responseData)
         };
 
         fetchedData();
-    }, [params.id])
+    }, [id])
     return (
         <div className="mainContainer">
             {product.data.title}

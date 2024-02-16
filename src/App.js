@@ -1,8 +1,9 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import Category from './components/Category';
 import CategoryProduct from './components/CategoryProduct';
 import { getCategories, getProducts  } from './fetcher';
+
+import { Link } from 'react-router-dom';
 
 function App() {
   const [categories, setCategories] = useState({errorMessage: '', data: []});
@@ -18,16 +19,11 @@ function App() {
 
   const renderCategories = () => {
     return categories.data.map(category => {
-      return <Category key={category.id} category={category} onCategoryClick={() => handleCategoryClick(category.id)}/>
+      return <li key={category.id}><Link to={`/categories/${category.id}`}>{category.title}</Link></li>
     })
   }
 
-  const renderProducts = () => {
-    return products.data.map(product => {
-      // return <li key={product.id}>{product.title}</li>
-      return <CategoryProduct key={product.id} product={product}/>
-    })
-  }
+
 
   const handleCategoryClick = async (id) => {
     const responseObject = await getProducts(id);
@@ -38,14 +34,14 @@ function App() {
     <header>My Store</header>
     <section>
       <nav>
-        {categories.data && renderCategories()}
+        <ul>
+          {categories.data && renderCategories()}
+        </ul>
+
         {categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
       </nav>
       <article>
-        {products.data.length>1 && <h1>Products</h1>}
-        {/* {products.data.length<1 && <h1>No Products Found!</h1>} */}
-        {products.data && renderProducts()}
-        {products.errorMessage && <div>Error: {products.errorMessage}</div>}
+
       </article>
     </section>
     <footer>

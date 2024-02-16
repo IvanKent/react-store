@@ -10,7 +10,6 @@ const ProductTitle = styled.h2`
     font-size: 20px;
 `;
 
-
 export default function CategoryProduct({product}) {
     const navigate = useNavigate();
     return(
@@ -21,7 +20,7 @@ export default function CategoryProduct({product}) {
                         {product.title}
                     </Link>
                 </ProductTitle>
-                <div className='productContainer'>
+                <div className='productContainer'> 
                         <img className='productImage' src={process.env.PUBLIC_URL + `/assets/${product.image}`} alt={product.description}/>
                     <div className='productDetails'>
                         <h3>Dimension</h3>

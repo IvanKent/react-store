@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import ProductDetail from './components/ProductDetail';
 import Basket from './components/Basket';
 import Checkout from './components/Checkout';
+import Category from './components/Category';
 
 import {
   BrowserRouter,
@@ -23,6 +24,7 @@ root.render(
           <Route path='/basket' element={<Basket/>}/>
           <Route path='checkout' element={<Checkout/>}/>
           <Route path='/products/:id' element={<ProductDetail/>}/>
+          <Route path='/categories/:id' element={<Category/>}></Route>
 
         </Routes>
       </BrowserRouter>
