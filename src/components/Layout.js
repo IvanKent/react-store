@@ -25,7 +25,7 @@ export default function Layout({categories, }){
             </article>
             </section>
             <footer>
-            footer
+            <Link to='/'>Home</Link> | <Link to='/basket'>Basket</Link>
             </footer>
 
             </div>
