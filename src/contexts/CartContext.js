@@ -8,12 +8,43 @@ const initialState = {cartItems: []}
 
 export default function CartContextProvider({children}) {
     const [state, dispatch] = useReducer(CartReducer, initialState)
+
+    //adds an item in the cart
     const addProduct = (payload) => {
         dispatch({type: 'ADD', payload})
     }
+    //removes item in the cart
+    const removeProduct = payload => {
+        dispatch({type: 'REMOVE', payload})
+    }
+    //increase the item quantity in the cart
+    const increaseQty = payload => {
+        dispatch({type: 'INC_QTY', payload})
+    }
+    //decrease item quantity in the cart
+    const decreaseQty = payload => {
+        dispatch({type: 'DEC_QTY', payload})
+    }
+    
+    //removes all the items in the cart
+    const clearBasket = payload => {
+        dispatch({type: 'CLEAR', payload: undefined})
+    }
 
+    //retrieves the items from the basket
+    const getItems = () => {
+        return state.cartItems;
+    }
+
+    //expose all the methods in the provider
+    //where it can be used within the application
     const contextValues = {
         addProduct,
+        removeProduct,
+        increaseQty,
+        decreaseQty,
+        clearBasket,
+        getItems,
         ...state
     }
 
