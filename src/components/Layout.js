@@ -1,3 +1,4 @@
+//main layout
 import { Outlet, Link } from "react-router-dom"
 
 export default function Layout({categories, }){
@@ -10,8 +11,12 @@ export default function Layout({categories, }){
 
     return (
         <>
-            <div className='mainContainer'>
-            <header>My Store</header>
+            <div className='container-fluid'>
+                <nav class="navbar bg-body-tertiary">
+                    <div class="container-fluid">
+                        <span class="navbar-brand mb-0 h1">My Store</span>
+                    </div>
+                </nav>
             <section>
             <nav>
                 <ul>
