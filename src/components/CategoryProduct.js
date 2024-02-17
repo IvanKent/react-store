@@ -4,7 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import '../CategoryProduct.css'
 import styled from 'styled-components';
-
+import { CartContext } from '../contexts/CartContext';
+import { useContext } from 'react';
 
 //sample using styled-components 
 const ProductTitle = styled.h2`
@@ -14,6 +15,8 @@ const ProductTitle = styled.h2`
 
 export default function CategoryProduct({product}) {
     const navigate = useNavigate();
+    const cartContext = useContext(CartContext);
+    const {addProduct} = cartContext;
     return(
         <>
             <div className='productMainContainer'>
@@ -42,7 +45,9 @@ export default function CategoryProduct({product}) {
                         <button onClick={() => navigate(`products/${product.id}`)}>
                             View Product
                         </button>
-                        <button>Add to Basket</button>
+                        <button className='button button-success'
+                        onClick={() => addProduct(product)}
+                        >Add to Basket</button>
                     </div>
                 </div>
 
