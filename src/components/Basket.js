@@ -1,6 +1,35 @@
 import '../Basket.css'
-
+import { useContext } from 'react'
+import  {CartContext}  from '../contexts/CartContext'
+import { Link, useNavigate } from 'react-router-dom'
 export default function Basket(){
+    const navigate = useNavigate()
+    const {getItems} = useContext(CartContext)
+    const renderCart = () => {
+        const cartItems = getItems();
+        debugger;
+
+        if(cartItems.length>0){
+            return cartItems.map(item => {
+                return (
+                <div className='row' key={item.id}>
+                    <div className='col'>
+                        <Link to={`/products/${item.id}`}>{item.title}</Link>
+                    </div>
+                    <div className='col text-center'>
+                        {item.quantity}
+                    </div>
+                    <div className='col text-center'>
+                        {item.price}
+                    </div>
+                </div>)
+
+            })
+        }else{
+            return <div>The basket is empty.</div>
+        }
+    } 
+
     return (
         <div className="container-fluid">
             <nav className="navbar ">
@@ -14,18 +43,17 @@ export default function Basket(){
             <div className="container-fluid pad">
                 <div className="row">
                     <div className="col">Item</div>
-                    <div className="col">Quantity</div>
-                    <div className="col">Price</div>
+                    <div className="col text-center">Quantity</div>
+                    <div className="col text-center">Price</div>
                 </div>
             </div>
 
-            <div className="container-fluid pad">
-                <div className="row">
-                    <div className="col">Item</div>
-                    <div className="col">Quantity</div>
-                    <div className="col">Price</div>
+            {renderCart && (
+                <div className="container-fluid pad">
+                    {renderCart()}
                 </div>
-            </div>
+            )}
+
 
             <div className="row d-flex shop-end">
                 <div className="col justify-content-start">
