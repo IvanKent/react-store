@@ -1,12 +1,17 @@
 import '../Basket.css'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import  {CartContext}  from '../contexts/CartContext'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { UpIcon, DownIcon, TrashIcon } from './Icons'
 export default function Basket(){
+    const [cartItems, setCartItems] = useState([])
     const navigate = useNavigate()
     const {getItems, clearBasket, increaseQty, decreaseQty, removeProduct } = useContext(CartContext)
+    useEffect(() => {
+        const cartItems = getItems();
+        setCartItems(cartItems);
+    }, [getItems])
     const renderCart = () => {
         const cartItems = getItems();
 
@@ -19,12 +24,12 @@ export default function Basket(){
                     </div>
                     <div className='col text-center'>
                         {item.quantity}
-                        <UpIcon width={30} onClick={() => increaseQty({id: item.id})}/>
-                        <DownIcon width={30} onClick={() => decreaseQty({id: item.id})}/>
-                        <TrashIcon width={30} onClick={() => removeProduct({id: item.id})}/>
+                        <UpIcon width={30} onClick={() => setCartItems(increaseQty({id: item.id}))}/>
+                        <DownIcon width={30} onClick={() => setCartItems(decreaseQty({id: item.id}))}/>
+                        <TrashIcon width={30} onClick={() => setCartItems(removeProduct({id: item.id}))}/>
                     </div>
                     <div className='col text-center'>
-                        {item.price}
+                        ${item.price}
                     </div>
                 </div>)
 
@@ -70,11 +75,11 @@ export default function Basket(){
             <div className="row d-flex shop-end">
                 <div className="col justify-content-start">
                     <button className='btn btn-outline-danger'
-                    onClick={() => clearBasket()}
+                    onClick={() => setCartItems(clearBasket())}
                     >Clear</button>
                 </div>
                 <div className="col text-end">
-                    {renderCart() ? <h4>Total: 0</h4> : <h4>Total: ${renderTotal()}</h4>}
+                    <h4>Total: ${renderTotal()}</h4>
                     
                 </div>
             </div>

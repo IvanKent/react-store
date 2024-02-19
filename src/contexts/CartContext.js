@@ -12,23 +12,28 @@ export default function CartContextProvider({children}) {
     //adds an item in the cart
     const addProduct = (payload) => {
         dispatch({type: 'ADD', payload})
+        return state.cartItems;
     }
     //removes item in the cart
     const removeProduct = payload => {
         dispatch({type: 'REMOVE', payload})
+        return state.cartItems;
     }
     //increase the item quantity in the cart
     const increaseQty = payload => {
         dispatch({type: 'INC_QTY', payload})
+        return state.cartItems;
     }
     //decrease item quantity in the cart
     const decreaseQty = payload => {
         dispatch({type: 'DEC_QTY', payload})
+        return state.cartItems;
     }
     
     //removes all the items in the cart
     const clearBasket = payload => {
         dispatch({type: 'CLEAR', payload: undefined})
+        return state.cartItems;
     }
 
     //retrieves the items from the basket
