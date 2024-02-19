@@ -2,12 +2,13 @@ import '../Basket.css'
 import { useContext } from 'react'
 import  {CartContext}  from '../contexts/CartContext'
 import { Link, useNavigate } from 'react-router-dom'
+
+import { UpIcon, DownIcon, TrashIcon } from './Icons'
 export default function Basket(){
     const navigate = useNavigate()
-    const {getItems} = useContext(CartContext)
+    const {getItems, clearBasket, increaseQty, decreaseQty, removeProduct } = useContext(CartContext)
     const renderCart = () => {
         const cartItems = getItems();
-        debugger;
 
         if(cartItems.length>0){
             return cartItems.map(item => {
@@ -18,6 +19,9 @@ export default function Basket(){
                     </div>
                     <div className='col text-center'>
                         {item.quantity}
+                        <UpIcon width={30} onClick={() => increaseQty({id: item.id})}/>
+                        <DownIcon width={30} onClick={() => decreaseQty({id: item.id})}/>
+                        <TrashIcon width={30} onClick={() => removeProduct({id: item.id})}/>
                     </div>
                     <div className='col text-center'>
                         {item.price}
@@ -36,7 +40,7 @@ export default function Basket(){
                 <div className="container-fluid">
                     <h3 className="navbar-brand">Shopping Basket</h3>
                     <form className="d-flex">
-                    <button className="btn btn-outline-success">Checkout</button>
+                    <button className="btn btn-outline-success" onClick={() => navigate('/checkout')}>Checkout</button>
                     </form>
                 </div>
             </nav>
@@ -57,7 +61,9 @@ export default function Basket(){
 
             <div className="row d-flex shop-end">
                 <div className="col justify-content-start">
-                    <button className='btn btn-outline-danger'>Clear</button>
+                    <button className='btn btn-outline-danger'
+                    onClick={() => clearBasket()}
+                    >Clear</button>
                 </div>
                 <div className="col text-end">
                     <h4>Total:</h4>
