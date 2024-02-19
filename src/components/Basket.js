@@ -34,6 +34,14 @@ export default function Basket(){
         }
     } 
 
+    const renderTotal = () => {
+        const cartItems = getItems();
+        const total = cartItems.reduce((total, item) => (
+            total + item.price * item.quantity
+        ), 0)
+        return total;
+    }
+
     return (
         <div className="container-fluid">
             <nav className="navbar ">
@@ -66,7 +74,8 @@ export default function Basket(){
                     >Clear</button>
                 </div>
                 <div className="col text-end">
-                    <h4>Total:</h4>
+                    {renderCart() ? <h4>Total: 0</h4> : <h4>Total: ${renderTotal()}</h4>}
+                    
                 </div>
             </div>
         </div>

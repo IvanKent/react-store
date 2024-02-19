@@ -24,7 +24,7 @@ export default function CartReducer(state, action){
                 cartItems: updatedCartItems,
               };
             }
-            break;
+            
             
         case "REMOVE":
             if (index > -1) {
@@ -57,9 +57,12 @@ export default function CartReducer(state, action){
                 const updatedCartItems = state.cartItems.map((item, i) =>
                 i === index ? { ...item, quantity: item.quantity - 1 } : item
               );
+
+                //if the item quantity becomes 0, removes it
+                const filteredCartItems = updatedCartItems.filter(item => item.quantity > 0)
               return {
                 ...state,
-                cartItems: updatedCartItems,
+                cartItems: filteredCartItems,
               };
             }
             break;
@@ -70,7 +73,7 @@ export default function CartReducer(state, action){
                 ...state,
                 cartItems: []
             }
-            break;
+            
 
         default:
     }
