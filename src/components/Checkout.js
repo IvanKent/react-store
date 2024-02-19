@@ -1,7 +1,69 @@
+import { useNavigate } from "react-router-dom"
+
 export default function Checkout(){
+    const navigate = useNavigate();
+    const confirmOrder = (ev) => {
+        navigate('/orderconfirmation');
+    }
     return (
-        <div>
-            Checkout
+        <div className="container-fluid">
+            <h3>Shopping Checkout</h3>
+            <div className="row container-fluid mb-4">
+                <div className="col">
+                    <div className="row">
+                        <div className="col mb-3 mt-2 border-bottom pb-2 font-weight-bold">
+                            Your Details
+                        </div>
+                        <div className="row">
+                            <div className="col">
+                                <div class="mb-3">
+                                    <label for="name" className="form-label">Name</label>
+                                    <input type="text" className="form-control" id="name" placeholder="name"/>
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div class="mb-3">
+                                    <label for="email" className="form-label">Email</label>
+                                    <input type="email" className="form-control" id="email" placeholder="email"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col mb-3 mt-2 border-bottom pb-2 font-weight-bold">
+                            Address Details
+                        </div>
+                        <div className="row">
+                            <div className="col">
+                                <div class="mb-3">
+                                    <label for="billingAddress" class="form-label">Billing Address</label>
+                                    <textarea class="form-control" id="billingAddress" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div class="mb-3">
+                                    <label for="shippingAddress" class="form-label">Billing Address</label>
+                                    <textarea class="form-control" id="shippingAddress" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div className="col d-flex justify-content-end">
+                    <button className="btn btn-danger mr-1"
+                        onClick={() => navigate('/basket')}
+                    >
+                        cancel
+                    </button>
+                    <button className="btn btn-success mr-1"
+                        onClick={()=> confirmOrder()}
+                    >
+                        Confirm Order
+                    </button>
+                </div>
         </div>
     )
 }

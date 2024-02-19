@@ -9,6 +9,7 @@ import Checkout from './components/Checkout';
 import Category from './components/Category';
 import Layout from './components/Layout';
 import Home from './components/Home';
+import OrderConfirmation from './components/OrderConfirmation';
 
 import {
   BrowserRouter,
@@ -19,7 +20,6 @@ import {
 
 function App() {
   const [categories, setCategories] = useState({errorMessage: '', data: []});
-  const [products, setProducts] = useState({errorMessage: '', data: []});
   useEffect(() => {
       const fetchedData = async () => {
           const responseObject = await getCategories();
@@ -38,10 +38,11 @@ function App() {
           <Route path='/' element={<Layout categories={categories}/>}>
             <Route index element={<Home/>}/>
             <Route path='/basket' element={<Basket/>}/>
-            <Route path='checkout' element={<Checkout/>}/>
-            <Route path='/products/:id' element={<ProductDetail/>}/>
+            <Route path='/checkout' element={<Checkout/>}/>
+            <Route path='/orderconfirmation' element={<OrderConfirmation/>}/>
             <Route path='/categories/:id' element={<Category/>}/>
-            
+            <Route path='/products/:id' element={<ProductDetail/>}/>
+
           </Route>
         </Routes>
       </BrowserRouter>
