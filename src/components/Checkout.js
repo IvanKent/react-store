@@ -9,6 +9,12 @@ export default function Checkout(){
     })
     const navigate = useNavigate();
 
+    // const errors = {
+    //     name: form.name.length === 0,
+    //     email: form.email.length === 0,
+    //     shippingAddress1: form.shippingAddress1 === 0
+    // }
+    // const disabled = Object.keys(errors).some((x) => errors[x])
 
     const handleChange = (evt) => {
         const {name, value} = evt.target;
@@ -21,6 +27,10 @@ export default function Checkout(){
     }
 
     const handleSubmit = (evt) => {
+        // if(disabled){
+        //     evt.preventDefault();
+        //     return;
+        // }
         navigate('/orderconfirmation');
     }
 
@@ -81,7 +91,9 @@ export default function Checkout(){
                     >
                         cancel
                     </button>
-                    <button className="btn btn-success mr-1">
+                    <button className="btn btn-success mr-1"
+                    //  disabled={disabled}
+                     >
                         Confirm Order
                     </button>
                 </div>
