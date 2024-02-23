@@ -10,6 +10,7 @@ import Category from './components/Category';
 import Layout from './components/Layout';
 import Home from './components/Home';
 import OrderConfirmation from './components/OrderConfirmation';
+import SearchResult from './components/SearchResult';
 
 import {
   BrowserRouter,
@@ -40,6 +41,7 @@ function App() {
             <Route path='/basket' element={<Basket/>}/>
             <Route path='/checkout' element={<Checkout/>}/>
             <Route path='/orderconfirmation' element={<OrderConfirmation/>}/>
+            <Route path='/search' element={<SearchResult/>}/>
             <Route path='/categories/:id' element={<Category/>}/>
             <Route path='/products/:id' element={<ProductDetail/>}/>
 

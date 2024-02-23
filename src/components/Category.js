@@ -10,8 +10,6 @@ export default function Category({category, onCategoryClick}){
   //sets initial data
   const [products, setProducts] = useState({errorMessage: '', data: []})
   const {id} = useParams(); //gets the id from the URL
-
-
   useEffect(() => {
     //function to fetch data from the fetcher
     const fetchedData = async() => {

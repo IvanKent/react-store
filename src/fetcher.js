@@ -32,3 +32,8 @@ export const getProductById = (id) => {
     const data = fetcher(`/products/${id}`)
     return data;
 }
+
+export const getProductsByQuery =  (query) => {
+    const data = fetcher(`/products?q=`+query)
+    return data;
+}
