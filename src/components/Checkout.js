@@ -1,12 +1,31 @@
 import { useNavigate } from "react-router-dom"
+import { useState } from "react";
 
 export default function Checkout(){
+    const [form, setForm] = useState({
+        name: '',
+        email: '',
+        shippingAddress1: ''
+    })
     const navigate = useNavigate();
-    const confirmOrder = (ev) => {
+
+
+    const handleChange = (evt) => {
+        const {name, value} = evt.target;
+        setForm(prevState => {
+            return {
+                ...prevState,
+                [name]: value
+            }
+        })
+    }
+
+    const handleSubmit = (evt) => {
         navigate('/orderconfirmation');
     }
+
     return (
-        <div className="container-fluid">
+        <form className="container-fluid" onSubmit={handleSubmit}>
             <h3>Shopping Checkout</h3>
             <div className="row container-fluid mb-4">
                 <div className="col">
@@ -17,14 +36,16 @@ export default function Checkout(){
                         <div className="row">
                             <div className="col">
                                 <div class="mb-3">
-                                    <label for="name" className="form-label">Name</label>
-                                    <input type="text" className="form-control" id="name" placeholder="name"/>
+                                    <label for="name" className="form-label" >Name</label>
+                                    <input onChange={handleChange} required
+                                    type="text" className="form-control" id="name" placeholder="name"/>
                                 </div>
                             </div>
                             <div className="col">
                                 <div class="mb-3">
                                     <label for="email" className="form-label">Email</label>
-                                    <input type="email" className="form-control" id="email" placeholder="email"/>
+                                    <input onChange={handleChange} required
+                                    type="email" className="form-control" id="email" placeholder="email"/>
                                 </div>
                             </div>
                         </div>
@@ -38,13 +59,15 @@ export default function Checkout(){
                             <div className="col">
                                 <div class="mb-3">
                                     <label for="billingAddress" class="form-label">Billing Address</label>
-                                    <textarea class="form-control" id="billingAddress" rows="3"></textarea>
+                                    <textarea onChange={handleChange} required
+                                    class="form-control" id="billingAddress" rows="3"></textarea>
                                 </div>
                             </div>
                             <div className="col">
                                 <div class="mb-3">
                                     <label for="shippingAddress" class="form-label">Billing Address</label>
-                                    <textarea class="form-control" id="shippingAddress" rows="3"></textarea>
+                                    <textarea onChange={handleChange} required
+                                    class="form-control" id="shippingAddress" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -58,12 +81,10 @@ export default function Checkout(){
                     >
                         cancel
                     </button>
-                    <button className="btn btn-success mr-1"
-                        onClick={()=> confirmOrder()}
-                    >
+                    <button className="btn btn-success mr-1">
                         Confirm Order
                     </button>
                 </div>
-        </div>
+        </form>
     )
 }
