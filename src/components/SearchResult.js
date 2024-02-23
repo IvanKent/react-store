@@ -20,18 +20,21 @@ export default function SearchResult() {
     }, [query]);
 
     const renderProducts = () => {
+        if(products.data > 0 ){
         return products.data.map(product => {
             return <div key={product.id}>
                 {product.title}
             </div>
-        })
+        })}else{
+            return <div>No results found</div>
+        }
     }
 
 
     return (
         <div>
             {products.errorMessage && <div>{products.errorMessage}</div>}
-            {query.length>1 && products.data && renderProducts()}
+            {products.data && renderProducts()}
         </div>
     )
 }
